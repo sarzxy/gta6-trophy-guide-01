@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VICE CITY TROPHY GUIDE — GTA VI · PS5 · all 55 trophies</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">
+    <div class="brand-kicker">GRAND THEFT AUTO VI &middot; PLAYSTATION 5 &middot; OFFLINE GUIDE + TRACKER</div>
+    <h1>VICE CITY <span>TROPHY GUIDE</span></h1>
+    <p class="tagline">All 55 trophies — official names, descriptions &amp; grades — with a cited guide for each one, a platinum roadmap, and a checklist that saves in your browser. No account, no network, no Rockstar artwork: our own look.</p>
+  </div>
+  <div class="progress-card">
+    <div class="progress-numbers"><strong id="progress-count">0 / 55</strong><span id="progress-pct">0%</span></div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <div class="progress-grades" id="progress-grades"></div>
+    <div class="progress-note">Platinum <b>VICE GOT A PRICE!</b> pops when the other 54 are earned &middot; ~200 h &middot; 4/10 (PowerPyx)</div>
+  </div>
+</header>
+
+<nav class="roadmap-strip" id="roadmap-strip" aria-label="Platinum roadmap"></nav>
+
+<div class="toolbar">
+  <div class="tabs">
+    <button id="tab-checklist" type="button" class="active">Checklist</button>
+    <button id="tab-roadmap" type="button">Roadmap to Platinum</button>
+  </div>
+  <input id="search" type="search" placeholder="Search a trophy, mission or keyword…" aria-label="Search trophies">
+  <label>Kind
+    <select id="kind">
+      <option value="all">All kinds</option>
+      <option value="story">Story</option>
+      <option value="missable">Missable</option>
+      <option value="collectibles">Collectibles</option>
+      <option value="activities">Activities</option>
+      <option value="online">Online</option>
+      <option value="platinum">Platinum</option>
+    </select>
+  </label>
+  <label>Grade
+    <select id="grade">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="spoiler-label"><input id="spoiler" type="checkbox"> Hide story spoilers</label>
+  <button id="export" type="button">Export progress</button>
+  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+</div>
+
+<main>
+  <section id="view-checklist" class="checklist-view">
+    <div class="list-col">
+      <div class="list-meta"><span id="list-count"></span><span id="spoiler-note"></span></div>
+      <ul id="rows" class="trophy-list"></ul>
+    </div>
+    <aside class="detail-col" id="detail" aria-live="polite"></aside>
+  </section>
+  <section id="view-roadmap" class="roadmap-view" hidden>
+    <div class="roadmap-intro">
+      <h2>Roadmap to the Platinum</h2>
+      <p>Seven stages, in the order to play them. Story first, the one missable trophy during Chapter 1, then strangers, collectibles, activities and the money cleanup — 100% completion last. Guides report <b>no mission replay</b>, so keep a <b>manual save at the start of every chapter</b> and one before the final mission (Output Lag). Cheats switch trophies and saving off, so keep them off for the whole run (GTABase). There are <b>no online trophies</b> and no difficulty trophies — the list is long, not hard.</p>
+    </div>
+    <ol id="roadmap-stages" class="roadmap-stages"></ol>
+  </section>
+</main>
+
+<footer>
+  <h2>About the list &amp; the sources</h2>
+  <p>Names, descriptions and grades are the official PlayStation 5 list as published 18 November 2026 — 55 trophies: 1 Platinum, 2 Gold, 6 Silver, 46 Bronze; 28 of them hidden on PlayStation until earned. The list was reported by Push Square from Exophase, and GTABase, PowerPyx, GTA Zone, Output Lag and EGamers all report the same 55 names. Every guide on this page is written in our own words for this guide and names its sources beside it — a source is cited, never copied. Five trophies had no confirmed unlock method at launch (In The Beginning…, Capital Offense, Bad Luck, I Guess, The Truth Is Out There, Ten Pin) and their guides say so plainly instead of inventing a method. One trophy is flagged possibly missable: Positive Mental Attitude (GTABase / PowerPyx).</p>
+  <p id="source-list"></p>
+  <p class="fineprint">Unofficial fan guide. Not affiliated with Rockstar Games, Sony or PlayStation. No Rockstar logo, artwork or game screenshots are used. Progress is stored only in your browser (localStorage) and never leaves your machine.</p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
