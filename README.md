@@ -13,3 +13,4 @@ The best offline guide + tracker for the 55 PlayStation 5 trophies of Grand Thef
 - **Offline**: static files under `app/`, no build step, no network requests, no Rockstar artwork. Serve with `node serve.ts` and open http://localhost:8080.
 
 Entry program: `main.ts` (Node 22) copies `app/` + `screenshots/` to `/output` and writes `dossier.json` with the vendored `vendor/makefun-frontend.ts`.
+- **Layout**: a dense 3-column Leonida Platinum Log tracker layout in Vice City colours — checklist, cited detail, and next-up + sources side by side under a top strip, audit strip and tabs.
