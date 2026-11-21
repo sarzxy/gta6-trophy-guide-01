@@ -7,61 +7,83 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="masthead">
+<header class="topstrip">
   <div class="brand">
-    <div class="brand-kicker">GRAND THEFT AUTO VI &middot; PLAYSTATION 5 &middot; OFFLINE GUIDE + TRACKER</div>
-    <h1>VICE CITY <span>TROPHY GUIDE</span></h1>
-    <p class="tagline">All 55 trophies — official names, descriptions &amp; grades — with a cited guide for each one, a platinum roadmap, and a checklist that saves in your browser. No account, no network, no Rockstar artwork: our own look.</p>
+    <div class="brand-badge">VC</div>
+    <div class="brand-text">
+      <h1>VICE CITY <span>TROPHY GUIDE</span></h1>
+      <div class="brand-sub">GTA VI · PS5 · 55 trophies · every step cited</div>
+    </div>
   </div>
-  <div class="progress-card">
-    <div class="progress-numbers"><strong id="progress-count">0 / 55</strong><span id="progress-pct">0%</span></div>
+  <div class="top-actions">
+    <div class="earned-count"><strong id="progress-count">0 / 55</strong><span>earned</span></div>
     <div class="progress-bar"><div id="progress-fill"></div></div>
     <div class="progress-grades" id="progress-grades"></div>
-    <div class="progress-note">Platinum <b>VICE GOT A PRICE!</b> pops when the other 54 are earned &middot; ~200 h &middot; 4/10 (PowerPyx)</div>
+    <label class="shield-btn"><input id="spoiler" type="checkbox"> Spoiler shield</label>
+    <button id="export" type="button">Export</button>
+    <label class="import">Import <input id="import" type="file" accept="application/json"></label>
+    <span class="saved-note">✓ Saved in this browser</span>
   </div>
 </header>
 
-<nav class="roadmap-strip" id="roadmap-strip" aria-label="Platinum roadmap"></nav>
+<div class="audit-strip" id="audit-strip" aria-label="Audit"></div>
 
-<div class="toolbar">
+<nav class="tabrow">
   <div class="tabs">
-    <button id="tab-checklist" type="button" class="active">Checklist</button>
-    <button id="tab-roadmap" type="button">Roadmap to Platinum</button>
+    <button id="tab-tracker" type="button" class="active">Tracker</button>
+    <button id="tab-roadmap" type="button">Roadmap</button>
+    <button id="tab-missables" type="button">Missables</button>
+    <button id="tab-sources" type="button">Sources</button>
   </div>
-  <input id="search" type="search" placeholder="Search a trophy, mission or keyword…" aria-label="Search trophies">
-  <label>Kind
-    <select id="kind">
-      <option value="all">All kinds</option>
-      <option value="story">Story</option>
-      <option value="missable">Missable</option>
-      <option value="collectibles">Collectibles</option>
-      <option value="activities">Activities</option>
-      <option value="online">Online</option>
-      <option value="platinum">Platinum</option>
-    </select>
-  </label>
-  <label>Grade
-    <select id="grade">
-      <option value="all">All grades</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-  </label>
-  <label class="spoiler-label"><input id="spoiler" type="checkbox"> Hide story spoilers</label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
+  <div class="tab-tools">
+    <span class="progress-note">Platinum <b>VICE GOT A PRICE!</b> pops when the other 54 are earned · ~200 h · 4/10 (PowerPyx)</span>
+  </div>
+</nav>
 
 <main>
-  <section id="view-checklist" class="checklist-view">
-    <div class="list-col">
-      <div class="list-meta"><span id="list-count"></span><span id="spoiler-note"></span></div>
-      <ul id="rows" class="trophy-list"></ul>
+  <section id="view-tracker" class="tracker-view">
+    <div class="col-left">
+      <div class="filter-box">
+        <input id="search" type="search" placeholder="Search name…" aria-label="Search trophies">
+        <div class="filter-row">
+          <select id="kind" aria-label="Kind filter">
+            <option value="all">All kinds</option>
+            <option value="story">Story</option>
+            <option value="missable">Missable</option>
+            <option value="collectibles">Collectibles</option>
+            <option value="activities">Activities</option>
+            <option value="online">Online</option>
+            <option value="platinum">Platinum</option>
+          </select>
+          <select id="grade" aria-label="Grade filter">
+            <option value="all">All grades</option>
+            <option value="platinum">Platinum</option>
+            <option value="gold">Gold</option>
+            <option value="silver">Silver</option>
+            <option value="bronze">Bronze</option>
+          </select>
+        </div>
+        <div class="list-meta"><span id="list-count"></span><span id="spoiler-note"></span></div>
+      </div>
+      <div id="groups" class="groups"></div>
     </div>
-    <aside class="detail-col" id="detail" aria-live="polite"></aside>
+    <article class="col-center" id="detail" aria-live="polite"></article>
+    <aside class="col-right">
+      <div class="side-panel">
+        <h3>Next up — Roadmap order</h3>
+        <ol id="next-up" class="next-up"></ol>
+      </div>
+      <div class="side-panel">
+        <h3>Roadmap stages</h3>
+        <nav class="roadmap-strip" id="roadmap-strip" aria-label="Platinum roadmap"></nav>
+      </div>
+      <div class="side-panel">
+        <h3>Sources for this guide</h3>
+        <ol id="side-sources" class="side-sources"></ol>
+      </div>
+    </aside>
   </section>
+
   <section id="view-roadmap" class="roadmap-view" hidden>
     <div class="roadmap-intro">
       <h2>Roadmap to the Platinum</h2>
@@ -69,12 +91,26 @@
     </div>
     <ol id="roadmap-stages" class="roadmap-stages"></ol>
   </section>
+
+  <section id="view-missables" class="missables-view" hidden>
+    <div class="roadmap-intro">
+      <h2>Missables &amp; unconfirmed</h2>
+      <p>One trophy is flagged <b>possibly missable</b> — Positive Mental Attitude (GTABase / PowerPyx). Five more had <b>no confirmed unlock method</b> at launch and are shown plainly, never invented. Everything else on the list can be cleaned up after the story.</p>
+    </div>
+    <div id="missables-list" class="missables-list"></div>
+  </section>
+
+  <section id="view-sources" class="sources-view" hidden>
+    <div class="roadmap-intro">
+      <h2>About the list &amp; the sources</h2>
+      <p>Names, descriptions and grades are the official PlayStation 5 list as published 18 November 2026 — 55 trophies: 1 Platinum, 2 Gold, 6 Silver, 46 Bronze; 28 of them hidden on PlayStation until earned. The list was reported by Push Square from Exophase, and GTABase, PowerPyx, GTA Zone, Output Lag and EGamers all report the same 55 names. Every guide on this page is written in our own words for this guide and names its sources beside it — a source is cited, never copied. Where sources differ, both versions are shown.</p>
+    </div>
+    <p id="source-list" class="source-list-full"></p>
+    <div id="sources-audit" class="sources-audit"></div>
+  </section>
 </main>
 
 <footer>
-  <h2>About the list &amp; the sources</h2>
-  <p>Names, descriptions and grades are the official PlayStation 5 list as published 18 November 2026 — 55 trophies: 1 Platinum, 2 Gold, 6 Silver, 46 Bronze; 28 of them hidden on PlayStation until earned. The list was reported by Push Square from Exophase, and GTABase, PowerPyx, GTA Zone, Output Lag and EGamers all report the same 55 names. Every guide on this page is written in our own words for this guide and names its sources beside it — a source is cited, never copied. Five trophies had no confirmed unlock method at launch (In The Beginning…, Capital Offense, Bad Luck, I Guess, The Truth Is Out There, Ten Pin) and their guides say so plainly instead of inventing a method. One trophy is flagged possibly missable: Positive Mental Attitude (GTABase / PowerPyx).</p>
-  <p id="source-list"></p>
   <p class="fineprint">Unofficial fan guide. Not affiliated with Rockstar Games, Sony or PlayStation. No Rockstar logo, artwork or game screenshots are used. Progress is stored only in your browser (localStorage) and never leaves your machine.</p>
 </footer>
 <script type="module" src="app.js"></script>
